@@ -5,7 +5,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(250, 231, 234);
+  background-color: rgba(250, 149, 252, 0.129);
+  font-family: 'Roboto', sans-serif;
+  color: rgb(46, 4, 80);
 }
 
 code {

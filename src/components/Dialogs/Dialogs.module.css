@@ -1,0 +1,16 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+
+
+.dialog {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+
+.messages {
+    font-size: 20px;
+}

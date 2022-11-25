@@ -1,23 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+a {
+  text-decoration: none;
+}
+
 .header__wrapper {
-  background-color: rgb(223, 200, 245);
+  background-color: rgba(210, 167, 248, 0.545);
 }
-.header {
-  width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-}
-.header p {
-  margin: 0 auto;
-  font-weight: 900;
-  font-size: 35px;
-}
+
 .wrapper {
   width: 1200px;
   margin: 0 auto;
@@ -27,23 +23,12 @@
   grid-template-areas: "n c";
 
   /* grid-template-rows: 60px 1fr; */
-  grid-template-columns: 3fr 10fr;
+  grid-template-columns: 1.5fr 7fr;
   /* grid-gap: 10px; */
 }
 
-.header img{
-  width: 40px;
-}
-
-.nav {
-  grid-area: n;
-  background-color: blueviolet;
-}
-
-.content {
+.content__wrapper {
   grid-area: c;
-  background-color: beige;
-}
-.content img {
-  width: 700px;
+  background-color: rgba(247, 118, 215, 0.158);
+  padding: 40px
 }

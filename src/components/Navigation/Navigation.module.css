@@ -1,0 +1,31 @@
+.nav {
+    grid-area: n;
+    background-color: rgba(210, 167, 248, 0.545);
+
+    height: 350px;
+    border-radius: 0 0 0 25px;
+    font-size: 25px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 20px;
+}
+.item {
+    border-radius: 10px;
+}
+.item a {
+    display: block;
+    text-decoration: none;
+    color: rgb(46, 4, 80);
+    padding: 5px;
+    border-radius: 10px;
+    transition: background-color ease .4s;
+}
+.item a:hover {
+    background-color: rgba(255, 255, 255, 0.395);
+}
+
+.active {
+    background-color: rgba(255, 255, 255, 0.395);
+}
