@@ -10,14 +10,27 @@ a {
   text-decoration: none;
 }
 
+button {
+  padding: 10px 15px;
+  background-color: rgba(0, 4, 255, 0.395);
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+
 .header__wrapper {
   background-color: rgba(210, 167, 248, 0.545);
+  -webkit-box-shadow: 0px 9px 13px -5px rgba(255, 0, 169, 0.2);
+  -moz-box-shadow: 0px 9px 13px -5px rgba(255, 0, 169, 0.2);
+  box-shadow: 0px 9px 13px -5px rgba(255, 0, 169, 0.2);
 }
 
 .wrapper {
   width: 1200px;
   margin: 0 auto;
-  height: 100vh;
+  height: 94vh;
 
   display: grid;
   grid-template-areas: "n c";
