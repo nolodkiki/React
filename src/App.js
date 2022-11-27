@@ -11,8 +11,9 @@ import {
 import Music from './components/Music/Music';
 import News from './components/News/News';
 import Setings from './components/Setings/Setings';
+import Friends from './components/Friends/Friends';
 
-const App = function () {
+const App = function (props) {
   return (
     <Router>
       <div className="app">
@@ -23,11 +24,13 @@ const App = function () {
           <Navigation />
           <div className='content__wrapper'>
             <Routes>
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/dialogs/*" element={<Dialogs />} />
+              <Route path="/profile" element={<Profile state={props.state.profilePage} />} />
+              <Route path="/dialogs/*" element={<Dialogs state={props.state.dialogPage} />} />
               <Route path="/music" element={<Music />} />
               <Route path="/news" element={<News />} />
+              <Route path="/friends" element={<Friends state={props.state.friendPhotos}/>} />
               <Route path="/setings" element={<Setings />} />
+              
             </Routes>
           </div>
 

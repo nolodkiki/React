@@ -2,11 +2,12 @@ import MyPosts from './MyPosts/MyPost'
 // import s from './Profile.module.css'
 import ProfileInfo from './ProfileInfo/ProfileInfo'
 
-const Profile = function() {
+const Profile = function(props) {
+    let post = props.state.postData
     return (
         <div>
             <ProfileInfo />
-            <MyPosts />
+            <MyPosts post={post}/>
         </div>
     )
 }
