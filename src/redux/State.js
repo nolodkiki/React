@@ -1,5 +1,3 @@
-// import React from 'react';
-
 let state = {
     profilePage: {
         postData: [
@@ -33,11 +31,19 @@ let state = {
             { name: 'Yoon-gi', id: '4', photo: 'https://p.favim.com/orig/2018/09/09/meme-suga-min-yoongi-Favim.com-6299323.jpg' },
             { name: 'Jimin', id: '5', photo: 'https://i.pinimg.com/736x/87/0d/5f/870d5f5cb31b8c9620a262f27b9e7966.jpg' },
             { name: 'Hosok', id: '6', photo: 'https://i.pinimg.com/736x/e7/2b/bf/e72bbf8a269bb9776c5bca6afee998fc.jpg' },
-            { name: 'Jin', id: '7', photo: 'https://www.meme-arsenal.com/memes/704cf45c010f4671566deac3bd6404f4.jpg' }
+            { name: 'Jin', id: '7', photo: 'https://www.meme-arsenal.com/memes/704cf45c010f4671566deac3bd6404f4.jpg' },
+        ]
+    },
+
+    music: {
+        kpop: [
+            {title: 'Red Velvet - IRENE & SEULGI', link: 'https://www.youtube.com/watch?v=Ujb-gvqsoi0&list=RDUjb-gvqsoi0&start_radio=1&ab_channel=SMTOWN'},
+            {title: 'NCT U 엔시티 유', link: 'https://www.youtube.com/watch?v=tyrVtwE8Gv0&list=RDUjb-gvqsoi0&index=5&ab_channel=SMTOWN'},
+            {title: 'Agust D 대취타', link: 'https://www.youtube.com/watch?v=qGjAWJ2zWWI&list=RDUjb-gvqsoi0&index=10&ab_channel=HYBELABELS'},
+            {title: 'Jackson Wang - Blow', link: 'https://www.youtube.com/watch?v=qCZHarOQvc4&ab_channel=JacksonWang'},
+            {title: 'BTS - RUN', link: 'https://www.youtube.com/watch?v=aqW4xXUgmno&ab_channel=BANGTANTV'},
         ]
     }
-
-
 }
 
 export default state

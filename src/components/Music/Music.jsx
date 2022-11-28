@@ -1,22 +1,18 @@
+import MusicItem from "./MusicItem/MusicItem"
+import s from "./Music.module.css"
 
 
 
 
-const Music = () => {
+const Music = (props) => {
+    let music = props.state.kpop.map(m => <MusicItem title={m.title} link={m.link}/>)
     return (
-        <div className="list">
-            <div className="item">
-                <a href="https://www.youtube.com/watch?v=aqW4xXUgmno&ab_channel=BANGTANTV" rel="noreferrer" target ="_blank">BTS - RUN</a>
+        <div className={s.list}>
+            <div className={s.item}>
+                {music}
             </div>
         </div>
     )
 }
-
-
-
-
-
-
-
 
 export default Music

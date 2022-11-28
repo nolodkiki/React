@@ -1,7 +1,9 @@
 import { NavLink } from 'react-router-dom'
 import s from './Navigation.module.css'
+import NavFriends from './NavFriends/NavFriends'
 
-const Navigation = function () {
+const Navigation = (props) => {
+    let friend = props.state.photos.slice(0, 3).map(p => <NavFriends photo={p.photo} />);
     return (
         <nav className={s.nav}>
             <div className={s.item}>
@@ -18,6 +20,7 @@ const Navigation = function () {
             </div>
             <div className={s.item}>
                 <NavLink className = { navData => navData.isActive ? s.active : s.item } to='/friends'>Friends</NavLink>
+                    <div className={s.list}>{friend}</div>
             </div>
             <div className={s.item}>
                 <NavLink className = { navData => navData.isActive ? s.active : s.item } to='/setings'>Setings</NavLink>

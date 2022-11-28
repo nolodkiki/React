@@ -21,12 +21,12 @@ const App = function (props) {
           <Header />
         </div>
         <div className="wrapper">
-          <Navigation />
+          <Navigation state={props.state.friendPhotos} />
           <div className='content__wrapper'>
             <Routes>
               <Route path="/profile" element={<Profile state={props.state.profilePage} />} />
               <Route path="/dialogs/*" element={<Dialogs state={props.state.dialogPage} />} />
-              <Route path="/music" element={<Music />} />
+              <Route path="/music" element={<Music state={props.state.music}/>} />
               <Route path="/news" element={<News />} />
               <Route path="/friends" element={<Friends state={props.state.friendPhotos}/>} />
               <Route path="/setings" element={<Setings />} />
