@@ -24,7 +24,7 @@ const App = function (props) {
           <Navigation state={props.state.friendPhotos} />
           <div className='content__wrapper'>
             <Routes>
-              <Route path="/profile" element={<Profile state={props.state.profilePage} />} />
+              <Route path="/profile" element={<Profile state={props.state.profilePage} addPost={props.addPost} updateNewPostText={props.updateNewPostText}/>} />
               <Route path="/dialogs/*" element={<Dialogs state={props.state.dialogPage} />} />
               <Route path="/music" element={<Music state={props.state.music}/>} />
               <Route path="/news" element={<News />} />
