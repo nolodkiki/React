@@ -8,7 +8,7 @@ function MyPosts(props) {
 
     let link = React.createRef()
 
-    let addPost = () => {
+    let addPost1 = () => {
         props.addPost()
     }
 
@@ -22,7 +22,7 @@ function MyPosts(props) {
             <h3>My posts</h3>
             <textarea onChange={onPostChange} ref={link} className={s.textarea} value={props.post.newPostText}></textarea>
             <div>
-                <button onClick={addPost}>Add Post</button>
+                <button onClick={addPost1}>Add Post</button>
             </div>
             <div className='post'>New post</div>
             <div>
