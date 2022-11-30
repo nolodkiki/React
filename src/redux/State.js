@@ -5,9 +5,9 @@ let store = {
                 { message: 'BTS', id: '1', likes: '893K Likes' },
                 { message: 'Army', id: '2', likes: '1.2M Likes' },
             ],
-            newPostText: 'lalala'
+            newPostText: 'хуй'
         },
-    
+
         dialogPage: {
             dialogsData: [
                 { name: 'Jungkook', id: '1' },
@@ -18,13 +18,13 @@ let store = {
                 { name: 'Hosok', id: '6' },
                 { name: 'Jin', id: '7' }
             ],
-    
+
             messageData: [
                 { message: 'Party Party yeah', id: '1' },
                 { message: 'RRRRRRRRRRAP MONSTA', id: '2' }
             ],
         },
-    
+
         friendPhotos: {
             photos: [
                 { name: 'Jungkook', id: '1', photo: 'https://st1.bollywoodlife.com/wp-content/uploads/2021/08/Jungkook-meme-worthy-expressions-pics1.png' },
@@ -36,18 +36,21 @@ let store = {
                 { name: 'Jin', id: '7', photo: 'https://www.meme-arsenal.com/memes/704cf45c010f4671566deac3bd6404f4.jpg' },
             ]
         },
-    
+
         music: {
             kpop: [
-                {title: 'Red Velvet - IRENE & SEULGI', link: 'https://www.youtube.com/watch?v=Ujb-gvqsoi0&list=RDUjb-gvqsoi0&start_radio=1&ab_channel=SMTOWN'},
-                {title: 'NCT U 엔시티 유', link: 'https://www.youtube.com/watch?v=tyrVtwE8Gv0&list=RDUjb-gvqsoi0&index=5&ab_channel=SMTOWN'},
-                {title: 'Agust D 대취타', link: 'https://www.youtube.com/watch?v=qGjAWJ2zWWI&list=RDUjb-gvqsoi0&index=10&ab_channel=HYBELABELS'},
-                {title: 'Jackson Wang - Blow', link: 'https://www.youtube.com/watch?v=qCZHarOQvc4&ab_channel=JacksonWang'},
-                {title: 'BTS - RUN', link: 'https://www.youtube.com/watch?v=aqW4xXUgmno&ab_channel=BANGTANTV'},
+                { title: 'Red Velvet - IRENE & SEULGI', link: 'https://www.youtube.com/watch?v=Ujb-gvqsoi0&list=RDUjb-gvqsoi0&start_radio=1&ab_channel=SMTOWN' },
+                { title: 'NCT U 엔시티 유', link: 'https://www.youtube.com/watch?v=tyrVtwE8Gv0&list=RDUjb-gvqsoi0&index=5&ab_channel=SMTOWN' },
+                { title: 'Agust D 대취타', link: 'https://www.youtube.com/watch?v=qGjAWJ2zWWI&list=RDUjb-gvqsoi0&index=10&ab_channel=HYBELABELS' },
+                { title: 'Jackson Wang - Blow', link: 'https://www.youtube.com/watch?v=qCZHarOQvc4&ab_channel=JacksonWang' },
+                { title: 'BTS - RUN', link: 'https://www.youtube.com/watch?v=aqW4xXUgmno&ab_channel=BANGTANTV' },
             ]
         }
     },
 
+    subscribe(observer) {
+        this._callSubscriber = observer
+    },
 
     _callSubscriber() {
         console.log('change')
@@ -61,27 +64,38 @@ let store = {
         return this._state
     },
 
-    addPost() {
-        let newPost = {
-            message: this._state.profilePage.newPostText,
-            id: 3,
-            likes: 0
+    // addPost() {
+    //     let newPost = {
+    //         message: this._state.profilePage.newPostText,
+    //         id: 3,
+    //         likes: 0
+    //     }
+    //     this._state.profilePage.postData.push(newPost)
+    //     this._callSubscriber(this._state)   
+    //     this._state.profilePage.newPostText = ''
+    // },
+
+    // updateNewPostText(newText) {
+    //     this._state.profilePage.newPostText = newText
+    //     this._callSubscriber(this._state)
+    // },
+
+
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            let newPost = {
+                message: this._state.profilePage.newPostText,
+                id: 3,
+                likes: 0
+            }
+            this._state.profilePage.postData.push(newPost)
+            this._callSubscriber(this._state)
+            this._state.profilePage.newPostText = ''
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.newText
+            this._callSubscriber(this._state)
         }
-        this._state.profilePage.postData.push(newPost)
-        this._callSubscriber(this._state)   
-        this._state.profilePage.newPostText = ''
-    },
-
-    updateNewPostText(newText) {
-        this._state.profilePage.newPostText = newText
-        this._callSubscriber(this._state)
-    },
-
-    
-
-    subscribe(observer) {
-        this._callSubscriber = observer
-    },
+    }
 }
 
 
