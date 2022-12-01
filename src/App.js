@@ -24,8 +24,8 @@ const App = function (props) {
           <Navigation state={props.state.friendPhotos} />
           <div className='content__wrapper'>
             <Routes>
-              <Route path="/profile" element={<Profile state={props.state.profilePage} dispatch={props.dispatch}/>} />
-              <Route path="/dialogs/*" element={<Dialogs state={props.state.dialogPage} />} />
+              <Route path="/" element={<Profile state={props.state.profilePage} dispatch={props.dispatch}/>} />
+              <Route path="/dialogs/*" element={<Dialogs state={props.state.dialogPage} dispatch={props.dispatch}/>} />
               <Route path="/music" element={<Music state={props.state.music}/>} />
               <Route path="/news" element={<News />} />
               <Route path="/friends" element={<Friends state={props.state.friendPhotos}/>} />
@@ -42,3 +42,5 @@ const App = function (props) {
 
 
 export default App;
+
+// Route следит за URL, если там написано, что написано в path то загружается element

@@ -7,7 +7,7 @@ const Navigation = (props) => {
     return (
         <nav className={s.nav}>
             <div className={s.item}>
-                <NavLink className = { navData => navData.isActive ? s.active : s.item } to='/profile'>Profile</NavLink>
+                <NavLink className = { navData => navData.isActive ? s.active : s.item } to='/'>Profile</NavLink>
             </div>
             <div className={`${s.item}`}>
                 <NavLink className = { navData => navData.isActive ? s.active : s.item } to='/dialogs'>Messages</NavLink>
@@ -31,3 +31,6 @@ const Navigation = (props) => {
 
 
 export default Navigation
+
+
+// NavLink меняет url
