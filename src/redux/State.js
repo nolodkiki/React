@@ -1,5 +1,6 @@
-const ADD_POST = 'ADD-POST'
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+import dialogReducer from "./dialog-reducer"
+import profileReducer from "./profile-reducer"
+
 let store = {
     _state: {
         profilePage: {
@@ -68,41 +69,12 @@ let store = {
     },
 
     dispatch(action) {
-        if (action.type === ADD_POST) {
-            let newPost = {
-                message: this._state.profilePage.newPostText,
-                id: 3,
-                likes: 0
-            }
-            this._state.profilePage.postData.push(newPost)
-            this._callSubscriber(this._state)
-            this._state.profilePage.newPostText = ''
-        } else if (action.type === UPDATE_NEW_POST_TEXT) {
-            this._state.profilePage.newPostText = action.newText
-            this._callSubscriber(this._state)
-        } else if (action.type === "ADD_MESSAGE") {
-            let newMessage = {
-                message: this._state.dialogPage.messageText,
-                id: 3
-            }
-            this._state.dialogPage.messageData.push(newMessage)
-            this._callSubscriber(this._state)
-            this._state.dialogPage.messageText = ''
-        } else if (action.type === 'UPDATE_NEW_MESSAGE_TEXT') {
-            this._state.dialogPage.messageText = action.newText
-            this._callSubscriber(this._state)
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogPage = dialogReducer(this._state.dialogPage, action)
+
+        this._callSubscriber(this._state)
     }
 }
-
-
-export const addMessageActionCreator = () => ({type: "ADD_MESSAGE"})
-export const UpdateNewMessageTextActionCreator = (text) => ({type: 'UPDATE_NEW_MESSAGE_TEXT', newText: text})
-
-export const addPostActionCreator = () => ({type: ADD_POST})
-
-export const UpdateNewPosttextActionCreator = text => ({type: UPDATE_NEW_POST_TEXT, newText: text})
-
 
 
 export default store
