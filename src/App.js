@@ -12,6 +12,7 @@ import Music from './components/Music/Music';
 import News from './components/News/News';
 import Setings from './components/Setings/Setings';
 import Friends from './components/Friends/Friends';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
 
 const App = function (props) {
   return (
@@ -24,8 +25,8 @@ const App = function (props) {
           <Navigation state={props.state.friendPhotos} />
           <div className='content__wrapper'>
             <Routes>
-              <Route path="/" element={<Profile state={props.state.profilePage} dispatch={props.dispatch}/>} />
-              <Route path="/dialogs/*" element={<Dialogs state={props.state.dialogPage} dispatch={props.dispatch}/>} />
+              <Route path="/" element={<Profile store={props.store}/>} />
+              <Route path="/dialogs/*" element={<DialogsContainer store={props.store}/>} />
               <Route path="/music" element={<Music state={props.state.music}/>} />
               <Route path="/news" element={<News />} />
               <Route path="/friends" element={<Friends state={props.state.friendPhotos}/>} />
