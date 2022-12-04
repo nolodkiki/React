@@ -5,6 +5,7 @@ import Post from './Post/Post'
 
 
 function MyPosts(props) {
+    console.log(props)
     let postElem = props.post.map(p => <Post message={p.message} id={p.id} likes={p.likes} />)
 
     let link = React.createRef()
@@ -16,7 +17,6 @@ function MyPosts(props) {
         let text = link.current.value
         props.onPostChange(text)
     }
-    debugger
     return (
         <div>
             <h3>My posts</h3>

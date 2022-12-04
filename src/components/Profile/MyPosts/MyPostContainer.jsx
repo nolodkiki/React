@@ -1,27 +1,44 @@
-import React from 'react'
+// import React from 'react'
+import { connect } from 'react-redux'
+// import MyContext from '../../../Context'
 import { addPostActionCreator, UpdateNewPosttextActionCreator } from '../../../redux/profile-reducer'
 import MyPosts from './MyPost'
 
+// function MyPostsContainer(props) {
 
-function MyPostsContainer(props) {
-    let state = props.store.getState()
+//     return (
+//         <MyContext.Consumer>{
+//             (store) => {
+//                 let state = store.getState()
 
-    let addPost = () => {
-        props.store.dispatch(addPostActionCreator())
+//                 let addPost = () => {
+//                 props.store.dispatch(addPostActionCreator())
+//             }
+            
+//             let onPostChange = (text) => {
+//                 let action = () => UpdateNewPosttextActionCreator(text)
+//             store.dispatch(action(text))
+//             }
+//             return (<MyPosts newPostText={state.profilePage.newPostText} post={state.profilePage.postData} addPost={addPost} onPostChange={onPostChange} />)
+//             }
+//         }
+//         </MyContext.Consumer>
+
+//     )
+// }
+const mapStateToProps = (state) => {
+    return {
+        newPostText: state.profilePage.newPostText,
+        post: state.profilePage.postData
     }
-
-    let onPostChange = (text) => {
-        let action = () => UpdateNewPosttextActionCreator(text)
-        props.store.dispatch(action(text))
-    }
-
-    return (
-        <div>
-            <MyPosts newPostText={state.profilePage.newPostText} post={state.profilePage.postData} addPost={addPost} onPostChange={onPostChange}/>
-        </div>
-
-        
-    )
 }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addPost: () => dispatch(addPostActionCreator()),
+        onPostChange: (text) => dispatch(UpdateNewPosttextActionCreator(text))
+    }
+        
+}
+const MyPostsContainer = connect(mapStateToProps,mapDispatchToProps)(MyPosts)
 
 export default MyPostsContainer
