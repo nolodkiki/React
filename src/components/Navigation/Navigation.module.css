@@ -2,7 +2,7 @@
     grid-area: n;
     background-color: rgba(210, 167, 248, 0.545);
 
-    height: 420px;
+    height: 480px;
     border-radius: 0 0 0 25px;
     font-size: 25px;
 
@@ -14,7 +14,7 @@
 .item {
     border-radius: 10px;
 }
-.item:nth-child(6) {
+.item:nth-child(7) {
     padding-top: 40px;
 }
 .item a {

@@ -12,6 +12,8 @@ import News from './components/News/News';
 import Setings from './components/Setings/Setings';
 import Friends from './components/Friends/Friends';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
+import FriendsContainer from './components/Friends/FriendsContainer';
+import UsersContainer from './components/Users/UsersContainer';
 const App = function (props) {
   return (
     <Router>
@@ -20,14 +22,15 @@ const App = function (props) {
           <Header />
         </div>
         <div className="wrapper">
-          <Navigation state={props.state.friendPhotos} />
+          <Navigation store={props.store} />
           <div className='content__wrapper'>
             <Routes>
               <Route path="/" element={<Profile store={props.store}/>} />
               <Route path="/dialogs/*" element={<DialogsContainer />} />
-              <Route path="/music" element={<Music state={props.state.music}/>} />
+              <Route path="/music" element={<Music store={props.store}/>} />
               <Route path="/news" element={<News />} />
-              <Route path="/friends" element={<Friends />} />
+              <Route path="/users" element={<UsersContainer />} />
+              <Route path="/friends" element={<FriendsContainer />} />
               <Route path="/setings" element={<Setings />} />
               
             </Routes>
