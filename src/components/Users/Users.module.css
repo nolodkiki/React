@@ -34,3 +34,12 @@
 .message {
     height: 100%;
 }
+
+span {
+    cursor: pointer;
+}
+
+.selectedPage {
+    font-weight: bold;
+    cursor: pointer;
+}

@@ -1,13 +1,8 @@
 let initialState = {
-    users:
-        [ ]
-            // { id: 1, photo: 'https://st1.bollywoodlife.com/wp-content/uploads/2021/08/Jungkook-meme-worthy-expressions-pics1.png', follow: true, name: 'Jungkook', city: 'Seoul', country: 'South Korea', message: 'Party Party Yeah' },
-            // { id: 2, photo: 'https://st1.bollywoodlife.com/wp-content/uploads/2021/08/Jungkook-meme-worthy-expressions-pics1.png', follow: false, name: 'Namjoon', city: 'Seoul', country: 'South Korea', message: 'RRRRRRRAP MONSTA' },
-            // { id: 3, photo: 'https://st1.bollywoodlife.com/wp-content/uploads/2021/08/Jungkook-meme-worthy-expressions-pics1.png', follow: true, name: 'Taehyung', city: 'Seoul', country: 'South Korea', message: 'Party Party Yeah' },
-            // { id: 4, photo: 'https://st1.bollywoodlife.com/wp-content/uploads/2021/08/Jungkook-meme-worthy-expressions-pics1.png', follow: false, name: 'Yoon', city: 'Seoul', country: 'South Korea', message: 'Party Party Yeah' },
-            // {id: 5, name: 'Jimin', city: 'Seoul', country: 'South Korea', message: 'Party Party Yeah'},
-            // {id: 6, name: 'Hosok', city: 'Seoul', country: 'South Korea', message: 'Party Party Yeah'},
-            // {id: 7, name: 'Jin', city: 'Seoul', country: 'South Korea', message: 'Party Party Yeah'}
+    users: [ ],
+    pageSize: 5,
+    totalUsersCount: 1,
+    currentPage: 1
 }
 
 let usersReducer = (state = initialState, action) => {
@@ -38,16 +33,27 @@ let usersReducer = (state = initialState, action) => {
         case SET_USERS: {
             return { ...state, users: [...action.users] }
         }
+        case CURRENT_PAGE: {
+            return {...state, currentPage: action.currentPage}
+        }
+        case TOTAL_USERS: {
+            return {...state, totalUsersCount: action.totalUsers}
+        }
         default: return state
     }
 }
 
+
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
+const CURRENT_PAGE = 'CURRENT_PAGE'
+const TOTAL_USERS = 'TOTAL_USERS'
 
 export const followAC = (userId) => ({ type: FOLLOW, userId })
 export const unfollowAC = (userId) => ({ type: UNFOLLOW, userId })
 export const setUsersAC = (users) => ({type: SET_USERS, users })
+export const currentPageAC = (currentPage) => ({type: CURRENT_PAGE, currentPage})
+export const totalUsersAC = (totalUsers) => ({type: TOTAL_USERS, totalUsers})
 
 export default usersReducer
