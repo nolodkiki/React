@@ -16,7 +16,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
     );
 
 // store.subscribe(rerenderEntireTree) это функция колбэк, она вызывается из state с аргументом изменившегося state, т.е. когда мы нажимаем addPost, this._callSubscriber(this._state) <App /> перезаписывется здесь, т.к. здесь уже будет вызвана функция rerenderEntireTree(state), с помошью колбэка
-
+reportWebVitals()
 
 
 // bind(store). так как мы передаем, допустим addPost в MyPost, через пропсы, а в стэйте он имеет "message: this._state.profilePage.newPostText", то этот this будет иметь контекст пропсов в MyPost, а не конетекст store, поэтому мы биндим addPost 
