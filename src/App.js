@@ -1,7 +1,6 @@
 import './App.css';
 import Header from './components/Header/Header';
 import Navigation from './components/Navigation/Navigation';
-import Profile from './components/Profile/Profile';
 import {
   BrowserRouter as Router,
   Routes,
@@ -14,6 +13,7 @@ import Friends from './components/Friends/Friends';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import FriendsContainer from './components/Friends/FriendsContainer';
 import UsersContainer from './components/Users/UsersContainer';
+import ProfileContainer from './components/Profile/ProfileContainer';
 const App = function (props) {
   return (
     <Router>
@@ -25,14 +25,17 @@ const App = function (props) {
           <Navigation store={props.store} />
           <div className='content__wrapper'>
             <Routes>
-              <Route path="/" element={<Profile store={props.store}/>} />
+              {/* <Route path="/profile/*" element={<ProfileContainer store={props.store} />} /> */}
+              <Route path="/profile" element={<ProfileContainer />}>
+                <Route path=":userId" element={<ProfileContainer store={props.store}/>} />
+              </Route>
               <Route path="/dialogs/*" element={<DialogsContainer />} />
-              <Route path="/music" element={<Music store={props.store}/>} />
+              <Route path="/music" element={<Music store={props.store} />} />
               <Route path="/news" element={<News />} />
               <Route path="/users" element={<UsersContainer />} />
               <Route path="/friends" element={<FriendsContainer />} />
               <Route path="/setings" element={<Setings />} />
-              
+
             </Routes>
           </div>
 

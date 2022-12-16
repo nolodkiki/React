@@ -1,6 +1,12 @@
+import Preloader from '../../common/preloader/Fetching'
 import s from './ProfileInfo.module.css'
 
-const ProfileInfo = function () {
+const ProfileInfo = function (props) {
+    if(!props.profile) {
+        return <Preloader />
+    }
+
+
     return (
         <div>
             <div className='wallpaper'>
@@ -9,6 +15,7 @@ const ProfileInfo = function () {
             <div>
                 avatar + description
             </div>
+            <img src={props.profile.photos.large} alt="" />
         </div>
     )
 }

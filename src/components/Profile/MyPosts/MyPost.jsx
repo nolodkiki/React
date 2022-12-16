@@ -18,6 +18,7 @@ function MyPosts(props) {
     }
     return (
         <div>
+            
             <h3>My posts</h3>
             <textarea onChange={onPostChange} ref={link} className={s.textarea} value={props.newPostText}></textarea>
             <div>

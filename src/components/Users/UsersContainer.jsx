@@ -1,5 +1,5 @@
 import { connect } from "react-redux"
-import { currentPageAC, followAC, isFetchingAC, setUsersAC, totalUsersAC, unfollowAC } from "../../redux/users-reducer."
+import { page, follow, toggleFetching, setUsers, setTotalUsers, unfollow } from "../../redux/users-reducer."
 import axios from 'axios'
 import Users from './Users'
 import React from 'react'
@@ -17,7 +17,7 @@ class UsersAPI extends React.Component {
                 this.props.setTotalUsers(respons.data.totalCount)
             })
     }
-    
+
     onPageChange = (pageNumber) => {
         this.props.page(pageNumber)
         this.props.toggleFetching(true)
@@ -33,7 +33,7 @@ class UsersAPI extends React.Component {
     render() {
         return <>
             {this.props.isFetching ? <Preloader /> : null}
-            <Users 
+            <Users
                 pageSize={this.props.pageSize}
                 totalUsersCount={this.props.totalUsersCount}
                 currentPage={this.props.currentPage}
@@ -41,7 +41,7 @@ class UsersAPI extends React.Component {
                 users={this.props.users}
                 unfollow={this.props.unfollow}
                 follow={this.props.follow}
-                />
+            />
         </>
     }
 }
@@ -56,15 +56,25 @@ const mapStateToProps = (state) => {
     }
 }
 
-const MapDispatchToProps = (dispatch) => {
-    return {
-        follow: (userId) => dispatch(followAC(userId)),
-        unfollow: (userId) => dispatch(unfollowAC(userId)),
-        setUsers: (users) => dispatch(setUsersAC(users)),
-        page: (pageNumber) => dispatch(currentPageAC(pageNumber)),
-        setTotalUsers: (totalUsers) => dispatch(totalUsersAC(totalUsers)),
-        toggleFetching: (isFetching) => dispatch(isFetchingAC(isFetching))
-    }
-}
+// const MapDispatchToProps = (dispatch) => {
+//     return {
+//         follow: (userId) => dispatch(followAC(userId)),
+//         unfollow: (userId) => dispatch(unfollowAC(userId)),
+//         setUsers: (users) => dispatch(setUsersAC(users)),
+//         page: (pageNumber) => dispatch(currentPageAC(pageNumber)),
+//         setTotalUsers: (totalUsers) => dispatch(totalUsersAC(totalUsers)),
+//         toggleFetching: (isFetching) => dispatch(isFetchingAC(isFetching))
+//     }
+// }
 
-export default connect(mapStateToProps,MapDispatchToProps)(UsersAPI)
+export default connect(mapStateToProps, {
+    follow,
+    unfollow,
+    setUsers,
+    page,
+    setTotalUsers,
+    toggleFetching
+})(UsersAPI)
+
+
+// " ...если вы передаете в connect вторым аргументом не mapDispatchToProps, а объект с AC, то connect оборачивает ваши AC в функцию-обертку () => store.dispatch(AC) и передаёт в props компонента."
