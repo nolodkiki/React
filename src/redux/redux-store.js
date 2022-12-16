@@ -1,4 +1,5 @@
 import {combineReducers, legacy_createStore as createStore} from "redux"
+import authReducer from "./auth-reducer"
 import dialogReducer from "./dialog-reducer"
 import friendsReducer from "./friends-reducer"
 import musicReducer from "./music-reducer"
@@ -11,7 +12,8 @@ let reducers = combineReducers({
     dialogPage: dialogReducer,
     friendPhotos: friendsReducer,
     music: musicReducer,
-    usersPage: usersReducer
+    usersPage: usersReducer,
+    auth: authReducer
 })
 
 

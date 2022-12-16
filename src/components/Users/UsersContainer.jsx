@@ -10,7 +10,7 @@ import Preloader from "../common/preloader/Fetching"
 class UsersAPI extends React.Component {
     componentDidMount() {
         this.props.toggleFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {withCredentials: true})
             .then(respons => {
                 this.props.toggleFetching(false)
                 this.props.setUsers(respons.data.items)
@@ -21,7 +21,7 @@ class UsersAPI extends React.Component {
     onPageChange = (pageNumber) => {
         this.props.page(pageNumber)
         this.props.toggleFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {withCredentials: true})
             .then(respons => {
                 this.props.toggleFetching(false)
                 this.props.setUsers(respons.data.items)

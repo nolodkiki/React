@@ -1,5 +1,6 @@
 import Preloader from '../../common/preloader/Fetching'
 import s from './ProfileInfo.module.css'
+import BTS from './../../../img/BTS.jpg'
 
 const ProfileInfo = function (props) {
     if(!props.profile) {
@@ -10,7 +11,7 @@ const ProfileInfo = function (props) {
     return (
         <div>
             <div className='wallpaper'>
-                <img className={s.img} alt='bts' src='https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/BTS_on_the_Billboard_Music_Awards_red_carpet%2C_1_May_2019.jpg/1200px-BTS_on_the_Billboard_Music_Awards_red_carpet%2C_1_May_2019.jpg' />
+                <img className={s.img} alt='bts' src={BTS} />
             </div>
             <div>
                 avatar + description
