@@ -1,30 +1,28 @@
 import { connect } from "react-redux"
 import { page, follow, toggleFetching, setUsers, setTotalUsers, unfollow } from "../../redux/users-reducer."
-import axios from 'axios'
 import Users from './Users'
 import React from 'react'
 import Preloader from "../common/preloader/Fetching"
+import usersAPI from "../../api/api"
 
 
 
-class UsersAPI extends React.Component {
+class UsersContainer extends React.Component {
     componentDidMount() {
         this.props.toggleFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {withCredentials: true})
-            .then(respons => {
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
                 this.props.toggleFetching(false)
-                this.props.setUsers(respons.data.items)
-                this.props.setTotalUsers(respons.data.totalCount)
+                this.props.setUsers(data.items)
+                this.props.setTotalUsers(data.totalCount)
             })
     }
 
     onPageChange = (pageNumber) => {
         this.props.page(pageNumber)
         this.props.toggleFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {withCredentials: true})
-            .then(respons => {
+        usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
                 this.props.toggleFetching(false)
-                this.props.setUsers(respons.data.items)
+                this.props.setUsers(data.items)
             })
     }
 
@@ -74,7 +72,7 @@ export default connect(mapStateToProps, {
     page,
     setTotalUsers,
     toggleFetching
-})(UsersAPI)
+})(UsersContainer)
 
 
 // " ...если вы передаете в connect вторым аргументом не mapDispatchToProps, а объект с AC, то connect оборачивает ваши AC в функцию-обертку () => store.dispatch(AC) и передаёт в props компонента."
