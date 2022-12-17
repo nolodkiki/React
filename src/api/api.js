@@ -13,10 +13,10 @@ const instans = axios.create({
 
 export const followedAPI = {
     postFollow(userId) {
-        return instans.post(`follow/${userId}`).then(respons => respons.data)
+        return instans.post(`follow/${userId}`).then(respons => respons.data.resultCode)
     },
     deleteFollow(userId) {
-        return instans.delete(`follow/${userId}`).then(respons => respons.data.resulCode)
+        return instans.delete(`follow/${userId}`).then(respons => respons.data.resultCode)
     }
 }
 
@@ -29,6 +29,12 @@ export const usersAPI = {
     }
 }
 
+
+export const authAPI = {
+    getAuth() {
+        return instans.get(`auth/me`).then(respons => respons.data)
+    }
+}
 
 export default usersAPI
 // export default followAPI

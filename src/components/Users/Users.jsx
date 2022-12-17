@@ -27,18 +27,23 @@ const Users = (props) => {
                                 <img src={u.photos.small != null ? u.photos.small : idol} alt="img" className={s.photo} />
                             </NavLink>
                             {u.followed
-                                ? <button onClick={() => {
+                                ? <button disabled={props.followingInProgress.includes(u.id)} onClick={() => {
+                                    props.toggFollowingProgress(true, u.id)
+                                    debugger
                                     followedAPI.deleteFollow(u.id).then(resultCode => {
                                         if (resultCode === 0) {
                                             props.unfollow(u.id)
                                         }
+                                        props.toggFollowingProgress(false, u.id)
                                     })
                                 }}>Unfollow</button>
-                                : <button onClick={() => {
+                                : <button disabled={props.followingInProgress.includes(u.id)} onClick={() => {
+                                    props.toggFollowingProgress(true, u.id)
                                     followedAPI.postFollow(u.id).then(resultCode => {
                                         if (resultCode === 0) {
                                             props.follow(u.id)
                                         }
+                                        props.toggFollowingProgress(false, u.id)
                                     })
                                 }}>Follow</button>}
                         </div>
