@@ -8,12 +8,12 @@ import {
 import Music from './components/Music/Music';
 import News from './components/News/News';
 import Setings from './components/Setings/Setings';
-import Friends from './components/Friends/Friends';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import FriendsContainer from './components/Friends/FriendsContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
+import Login from './components/Login/Login';
 const App = function (props) {
   return (
     <Router>
@@ -27,7 +27,7 @@ const App = function (props) {
             <Routes>
               {/* <Route path="/profile/*" element={<ProfileContainer store={props.store} />} /> */}
               <Route path="/profile" element={<ProfileContainer />}>
-                <Route path=":userId" element={<ProfileContainer store={props.store}/>} />
+                <Route path=":userId" element={<ProfileContainer />} />
               </Route>
               <Route path="/dialogs/*" element={<DialogsContainer />} />
               <Route path="/music" element={<Music store={props.store} />} />
@@ -35,6 +35,7 @@ const App = function (props) {
               <Route path="/users" element={<UsersContainer />} />
               <Route path="/friends" element={<FriendsContainer />} />
               <Route path="/setings" element={<Setings />} />
+              <Route path="/login" element={<Login />} />
 
             </Routes>
           </div>

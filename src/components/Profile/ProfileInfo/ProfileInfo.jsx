@@ -1,6 +1,7 @@
 import Preloader from '../../common/preloader/Fetching'
 import s from './ProfileInfo.module.css'
 import BTS from './../../../img/BTS.jpg'
+import idol from './../../../img/Jungkook.jpg'
 
 const ProfileInfo = function (props) {
     if(!props.profile) {
@@ -16,7 +17,8 @@ const ProfileInfo = function (props) {
             <div>
                 avatar + description
             </div>
-            <img src={props.profile.photos.large} alt="" />
+            {props.profile.photos.large ? <img src={props.profile.photos.large} alt="" /> : <img src={idol} alt="" />}
+            
         </div>
     )
 }

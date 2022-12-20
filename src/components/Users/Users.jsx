@@ -1,8 +1,6 @@
 import s from './Users.module.css'
 import idol from '../../img/Jungkook.jpg'
 import { NavLink } from 'react-router-dom'
-import axios from 'axios'
-import { followedAPI } from '../../api/api'
 const Users = (props) => {
     let pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
     let pages = []
@@ -28,23 +26,25 @@ const Users = (props) => {
                             </NavLink>
                             {u.followed
                                 ? <button disabled={props.followingInProgress.includes(u.id)} onClick={() => {
+                                    
                                     props.toggFollowingProgress(true, u.id)
-                                    debugger
-                                    followedAPI.deleteFollow(u.id).then(resultCode => {
-                                        if (resultCode === 0) {
-                                            props.unfollow(u.id)
-                                        }
-                                        props.toggFollowingProgress(false, u.id)
-                                    })
+                                    props.unfollowAT(u.id)
+                                    // usersAPI.deleteFollow(u.id).then(resultCode => {
+                                    //     if (resultCode === 0) {
+                                    //         props.unfollow(u.id)
+                                    //     }
+                                    //     props.toggFollowingProgress(false, u.id)
+                                    // })
                                 }}>Unfollow</button>
                                 : <button disabled={props.followingInProgress.includes(u.id)} onClick={() => {
                                     props.toggFollowingProgress(true, u.id)
-                                    followedAPI.postFollow(u.id).then(resultCode => {
-                                        if (resultCode === 0) {
-                                            props.follow(u.id)
-                                        }
-                                        props.toggFollowingProgress(false, u.id)
-                                    })
+                                    props.followAT(u.id)
+                                    // usersAPI.postFollow(u.id).then(resultCode => {
+                                    //     if (resultCode === 0) {
+                                    //         props.follow(u.id)
+                                    //     }
+                                    //     props.toggFollowingProgress(false, u.id)
+                                    // })
                                 }}>Follow</button>}
                         </div>
                         <div className={s.info}>

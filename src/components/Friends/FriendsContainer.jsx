@@ -1,8 +1,5 @@
 import { connect } from "react-redux"
-import MyContext from "../../Context"
-import FriendItem from "./FriendItem/FriendItem"
 import Friends from "./Friends"
-import s from "./Friends.module.css"
 
 // const Friends = () => {
 //     return (

@@ -1,31 +1,23 @@
 import { connect } from "react-redux"
-import { page, follow, toggleFetching, setUsers, setTotalUsers, unfollow, toggFollowingProgress } from "../../redux/users-reducer."
+import { toggFollowingProgress, getUserThunkCreator, unfollowThunkCreator, followThunkCreator } from "../../redux/users-reducer."
 import Users from './Users'
 import React from 'react'
 import Preloader from "../common/preloader/Fetching"
-import usersAPI from "../../api/api"
+import withAuthRedirect from "../hoc/withAuthRedirect"
+import { compose } from "redux"
 
 
 
 class UsersContainer extends React.Component {
     componentDidMount() {
-        this.props.toggleFetching(true)
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-                this.props.toggleFetching(false)
-                this.props.setUsers(data.items)
-                this.props.setTotalUsers(data.totalCount)
-            })
+        this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
+
+
 
     onPageChange = (pageNumber) => {
-        this.props.page(pageNumber)
-        this.props.toggleFetching(true)
-        usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
-                this.props.toggleFetching(false)
-                this.props.setUsers(data.items)
-            })
+        this.props.getUsers(pageNumber, this.props.pageSize)
     }
-
 
 
     render() {
@@ -37,14 +29,17 @@ class UsersContainer extends React.Component {
                 currentPage={this.props.currentPage}
                 onPageChange={this.onPageChange}
                 users={this.props.users}
-                unfollow={this.props.unfollow}
-                follow={this.props.follow}
                 followingInProgress={this.props.followingInProgress}
                 toggFollowingProgress={this.props.toggFollowingProgress}
+                followAT={this.props.followAT}
+                unfollowAT={this.props.unfollowAT}
             />
         </>
     }
 }
+
+
+
 
 const mapStateToProps = (state) => {
     return {
@@ -57,6 +52,22 @@ const mapStateToProps = (state) => {
     }
 }
 
+
+export default compose(
+    connect(mapStateToProps, {
+        toggFollowingProgress,
+        getUsers: getUserThunkCreator,
+        unfollowAT: unfollowThunkCreator,
+        followAT: followThunkCreator
+    }),
+    withAuthRedirect
+)(UsersContainer)
+
+
+
+// " ...если вы передаете в connect вторым аргументом не mapDispatchToProps, а объект с AC, то connect оборачивает ваши AC в функцию-обертку () => store.dispatch(AC) и передаёт в props компонента."
+
+
 // const MapDispatchToProps = (dispatch) => {
 //     return {
 //         follow: (userId) => dispatch(followAC(userId)),
@@ -68,15 +79,12 @@ const mapStateToProps = (state) => {
 //     }
 // }
 
-export default connect(mapStateToProps, {
-    follow,
-    unfollow,
-    setUsers,
-    page,
-    setTotalUsers,
-    toggleFetching,
-    toggFollowingProgress
-})(UsersContainer)
+// const AuthRedirectComponent = withAuthRedirect(UsersContainer)
 
 
-// " ...если вы передаете в connect вторым аргументом не mapDispatchToProps, а объект с AC, то connect оборачивает ваши AC в функцию-обертку () => store.dispatch(AC) и передаёт в props компонента."
+// export default connect(mapStateToProps, {
+//     toggFollowingProgress,
+//     getUsers: getUserThunkCreator,
+//     unfollowAT: unfollowThunkCreator,
+//     followAT: followThunkCreator
+// })(AuthRedirectComponent)

@@ -1,4 +1,3 @@
-import MyContext from "../../Context"
 import FriendItem from "./FriendItem/FriendItem"
 import s from "./Friends.module.css"
 
