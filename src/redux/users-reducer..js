@@ -41,7 +41,6 @@ let usersReducer = (state = initialState, action) => {
             return { ...state, currentPage: action.currentPage }
         }
         case TOTAL_USERS: {
-            debugger
             return { ...state, totalUsersCount: action.totalUsers }
         }
         case TOGGLE_FETCHING: {

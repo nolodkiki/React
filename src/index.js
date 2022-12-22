@@ -8,11 +8,11 @@ import { Provider } from 'react-redux'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
-        <React.StrictMode>
+        // <React.StrictMode>
             <Provider store={store}>
                 <App store={store} />
             </Provider>
-        </React.StrictMode>
+        // {/* </React.StrictMode> */}
     );
 
 // store.subscribe(rerenderEntireTree) это функция колбэк, она вызывается из state с аргументом изменившегося state, т.е. когда мы нажимаем addPost, this._callSubscriber(this._state) <App /> перезаписывется здесь, т.к. здесь уже будет вызвана функция rerenderEntireTree(state), с помошью колбэка

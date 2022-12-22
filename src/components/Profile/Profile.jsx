@@ -8,7 +8,7 @@ const Profile = function(props) {
     // if (!props.isAuth) return <Navigate to={'/login'}/>
     return (
         <div>
-            <ProfileInfo profile={props.profile} />
+            <ProfileInfo profile={props.profile} status={props.status} updateUserStatusThunkCreator={props.updateUserStatusThunkCreator} />
             <MyPostsContainer store={props.store}/>
         </div>
     )

@@ -15,15 +15,7 @@ class HeaderContainer extends React.Component {
                 this.props.setAuthUserData(id, login, email)
             }
         })
-        // axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {withCredentials: true}) // withCredentials получаем с cooke 
-        //     .then(respons => {
-        //         if (respons.data.resultCode === 0) {
-        //             let id = respons.data.data.id
-        //             let login = respons.data.data.login
-        //             let email = respons.data.data.email
-        //             this.props.setAuthUserData(id, login, email)
-        //         }
-        //     })
+
     }
     render() {
         return <Header {...this.props}/>
@@ -38,3 +30,17 @@ const mapStateToProps = (state) => ({
 })
 
 export default connect (mapStateToProps, {setAuthUserData})(HeaderContainer)
+
+
+
+
+
+        // axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {withCredentials: true}) // withCredentials получаем с cooke 
+        //     .then(respons => {
+        //         if (respons.data.resultCode === 0) {
+        //             let id = respons.data.data.id
+        //             let login = respons.data.data.login
+        //             let email = respons.data.data.email
+        //             this.props.setAuthUserData(id, login, email)
+        //         }
+        //     })
