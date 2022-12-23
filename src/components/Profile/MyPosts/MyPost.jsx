@@ -1,35 +1,42 @@
 import React from "react";
+import { Field, reduxForm } from "redux-form"
 
 import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
-function MyPosts(props) {
-    let postElem = props.post.map((p) => <Post message={p.message} id={p.id} likes={p.likes} />);
+const MyPosts = (props) => {
+    let postElem = props.post.map((p) => <Post message={p.message} id={p.id} likes={p.likes} />)
 
-    let link = React.createRef();
-    let onAddPost = () => {
-        props.addPost();
-    };
 
-    let onPostChange = () => {
-        let text = link.current.value;
-        props.onPostChange(text);
-    };
+    const onSubmit = (values) => {
+        console.log(values)
+        props.addPost(values.newPostText)
+    }
     return (
         <div>
             <h3>My posts</h3>
-            <textarea
-                onChange={onPostChange}
-                ref={link}
-                className={s.textarea}
-                value={props.newPostText}></textarea>
-            <div>
-                <button onClick={onAddPost}>Add Post</button>
-            </div>
+            <PostReduxForm onSubmit={onSubmit} />
             <div className='post'>New post</div>
             <div>{postElem}</div>
         </div>
     );
 }
+
+
+
+
+const PostForm = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <Field className={s.textarea} name='newPostText' component='textarea' placeholder="write something"></Field>
+            <div>
+                <button>Add Post</button>
+            </div>
+        </form>
+        //props.handleSubmit приходит из reduxForm
+    )
+}
+
+const PostReduxForm = reduxForm({ form: 'newPostText' })(PostForm)
 
 export default MyPosts;

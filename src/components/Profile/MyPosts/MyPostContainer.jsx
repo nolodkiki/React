@@ -1,7 +1,7 @@
 // import React from 'react'
 import { connect } from 'react-redux'
 // import MyContext from '../../../Context'
-import { addPostActionCreator, UpdateNewPosttextActionCreator } from '../../../redux/profile-reducer'
+import { addPostActionCreator} from '../../../redux/profile-reducer'
 import MyPosts from './MyPost'
 
 // function MyPostsContainer(props) {
@@ -34,8 +34,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        addPost: () => dispatch(addPostActionCreator()),
-        onPostChange: (text) => dispatch(UpdateNewPosttextActionCreator(text))
+        addPost: (newPostText) => dispatch(addPostActionCreator(newPostText))
     }
         
 }

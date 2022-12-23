@@ -6,6 +6,7 @@ import musicReducer from "./music-reducer"
 import profileReducer from "./profile-reducer"
 import usersReducer from "./users-reducer."
 import thunkMiddleware from "redux-thunk"
+import { reducer as formReducer } from 'redux-form'
 
 
 let reducers = combineReducers({
@@ -14,13 +15,14 @@ let reducers = combineReducers({
     friendPhotos: friendsReducer,
     music: musicReducer,
     usersPage: usersReducer,
-    auth: authReducer
+    auth: authReducer,
+    form: formReducer
 })
 
 
 let store = createStore(reducers, applyMiddleware(thunkMiddleware))
 
-// window.store = store
+window.store = store
 
 
 export default store
