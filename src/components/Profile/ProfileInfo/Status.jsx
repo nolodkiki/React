@@ -12,7 +12,7 @@ const Status = (props) => {
 
     useEffect(() => {
         setStatus(props.status)
-    }, [props.status]) // если изменилося [props.status], то запускается callBack setStatus(props.status)
+    }, [props.status]) // если изменился [props.status], то запускается callBack setStatus(props.status)
 
     // Пример на классовой компонете
     // componentDidUpdate(prevProps, prevState) {

@@ -4,7 +4,8 @@ import Message from './Message/Message'
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 
-import { Navigate } from 'react-router-dom'
+import { Element } from '../common/preloader/FormsControl/FormControl'
+import { maxLengthCreator, required } from '../../validators/Validators'
 // import DilogReduxForm from './DilogsForm'
 
 
@@ -46,10 +47,13 @@ const Dialogs = (props) => {
     )
 }
 
+const maxLenght = maxLengthCreator(15)
+const Textarea = Element('textarea')
+
 const DilogsForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit} className={s.dilog_form}>
-            <Field component='textarea' placeholder='Write something' name='messageText' />
+            <Field component={Textarea} validate={[required, maxLenght]} placeholder='Write something' name='messageText' />
             <button>Add Post</button>
         </form>
     )
@@ -63,8 +67,8 @@ export default Dialogs
 
 
 
-{/* <div className={s.messages}>
+/* <div className={s.messages}>
                     {messageElement}
                     <textarea placeholder='Write something' value={props.messageText} onChange={onMessageChange}></textarea>
                     <button onClick={addPost}>Add Post</button>
-                </div> */}
+                </div> */

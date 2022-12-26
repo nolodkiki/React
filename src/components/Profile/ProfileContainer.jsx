@@ -6,6 +6,7 @@ import { getProfileThunkCreator, getUserStatusThunkCreator, updateUserStatusThun
 import { useParams } from 'react-router-dom';
 import withAuthRedirect from '../hoc/withAuthRedirect';
 import { compose } from 'redux';
+import { useEffect } from 'react';
 
 export function withRouter(Children) {
     return (props) => {
@@ -14,22 +15,42 @@ export function withRouter(Children) {
     }
 }
 
-class ProfileContainer extends React.Component {
-    componentDidMount() {
-        let userId = this.props.match.params.userId
-        if (!userId) {
-            userId = 27155
-        }
-        this.props.getProfileThunkCreator(userId)
-        this.props.getUserStatusThunkCreator(userId)
-    }
 
-    render() {
+
+// class ProfileContainer extends React.Component {
+//     componentDidMount() {
+//         let userId = this.props.match.params.userId
+//         if (!userId) {
+//             userId = 27155
+//         }
+//         this.props.getProfileThunkCreator(userId)
+//         this.props.getUserStatusThunkCreator(userId)
+//     }
+
+//     render() {
+//         return (
+//             <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateUserStatusThunkCreator={this.props.updateUserStatusThunkCreator} />
+//         )
+//     }
+// }
+
+const ProfileContainer = (props) => {
+    let userId = props.match.params.userId
+    const getProfileThunkCreator = () => props.getProfileThunkCreator(userId)
+    const getUserStatusThunkCreator = () => props.getUserStatusThunkCreator(userId)
+    useEffect(() => {
+            if (!userId) {
+                userId = 27155
+            }
+            getProfileThunkCreator()
+            getUserStatusThunkCreator()
+    }, [])
+
+
         return (
-            <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateUserStatusThunkCreator={this.props.updateUserStatusThunkCreator} />
+            <Profile {...props} profile={props.profile} status={props.status} updateUserStatusThunkCreator={props.updateUserStatusThunkCreator} />
         )
     }
-}
 
 const mapStateToProps = (state) => {
     return {
