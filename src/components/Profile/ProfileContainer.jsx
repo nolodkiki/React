@@ -40,7 +40,7 @@ const ProfileContainer = (props) => {
     const getUserStatusThunkCreator = () => props.getUserStatusThunkCreator(userId)
     useEffect(() => {
             if (!userId) {
-                userId = 27155
+                userId = props.authorizedUserId
             }
             getProfileThunkCreator()
             getUserStatusThunkCreator()
@@ -55,7 +55,8 @@ const ProfileContainer = (props) => {
 const mapStateToProps = (state) => {
     return {
         profile: state.profilePage.profile,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        authorizedUserId: state.auth.id
         // isAuth: state.auth.isAuth
     }
 }
@@ -63,7 +64,7 @@ const mapStateToProps = (state) => {
 export default compose(
     connect(mapStateToProps, { getProfileThunkCreator, getUserStatusThunkCreator, updateUserStatusThunkCreator }),
     withRouter,
-    withAuthRedirect
+    // withAuthRedirect
 )(ProfileContainer)
 
 

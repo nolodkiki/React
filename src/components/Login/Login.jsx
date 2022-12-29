@@ -1,10 +1,14 @@
 import React from "react"
+import { connect } from "react-redux"
+import { Navigate } from "react-router-dom"
 import { Field, reduxForm } from "redux-form"
+import { loginTC } from "../../redux/auth-reducer"
 import { maxLengthCreator, required } from "../../validators/Validators"
 import { Element } from "../common/preloader/FormsControl/FormControl"
+import style from "../common/preloader/FormsControl/FormControl.module.css"
 
 
-const maxLength = maxLengthCreator(10)
+const maxLength = maxLengthCreator(190)
 const Inputarea = Element('input')
 
 
@@ -12,14 +16,15 @@ const LoginForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field validate={[required, maxLength]} placeholder="login" component={Inputarea} name={'login'} />
+                <Field validate={[required, maxLength]} placeholder="login" component={Inputarea} name={'email'} type='email'/>
             </div>
             <div>
-                <Field validate={[required, maxLength]} placeholder="pasword" component={Inputarea} name={'password'} />
+                <Field validate={[required, maxLength]} placeholder="pasword" component={Inputarea} name={'password'} type='password' />
             </div>
             <div>
                 <Field type="checkBox" component='input' name={'remeberMe'} />remeber me
             </div>
+            {props.error && <div className={style.commandError}>{props.error}</div>}
             <div>
                 <button>Login</button>
             </div>
@@ -27,20 +32,26 @@ const LoginForm = (props) => {
     )
 
 }
+// error приходит из reduxForm
 
 const LoginReduxForm = reduxForm({form: 'login'})(LoginForm)
 
 const Login = (props) => {
     const onSubmit = (formData) => {
-        console.log(formData)
+        props.loginTC(formData.email, formData.password, formData.rememberMe)
     }
+
+    if (props.isAuth) return <Navigate to={"/profile"} />
+
     return <div>
             <h1>LOGIN</h1>
             <LoginReduxForm onSubmit={onSubmit} />
-            {/* <input type="text" placeholder="login"/>
-            <input type="text" placeholder="pasword"/>
-            <input type="checkBox"/>Remeber me */}
         </div>
 }
 
-export default Login
+const mapStateToProps = (state) => ({
+    isAuth: state.auth.isAuth
+})
+
+
+export default connect(mapStateToProps, {loginTC})(Login)

@@ -9,3 +9,9 @@
 .error_span span {
     color: red;
 }
+
+.commandError {
+    color: red;
+    border: 1px red solid;
+    pad: 5px;
+}

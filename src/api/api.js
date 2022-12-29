@@ -29,8 +29,14 @@ export const usersAPI = {
 
 export const authAPI = {
     getAuth() {
-        return instans.get(`auth/me`).then(respons => respons.data)
-    }
+        return instans.get(`auth/me`)
+    },
+    login(email, password, remeberMe) {
+        return instans.post(`auth/login`, {email, password, remeberMe})
+    },
+    logout() {
+        return instans.delete(`auth/login`)
+    },
 }
 
 export const profileAPI = {

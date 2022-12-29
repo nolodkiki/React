@@ -1,12 +1,11 @@
 import MusicItem from "./MusicItem/MusicItem"
 import s from "./Music.module.css"
-
+import { connect } from "react-redux"
 
 
 
 const Music = (props) => {
-    let state = props.store.getState()
-    let music = state.music.kpop.map(m => <MusicItem title={m.title} link={m.link}/>)
+    let music = props.music.map(m => <MusicItem title={m.title} link={m.link}/>)
     return (
         <div className={s.list}>
             <div className={s.item}>
@@ -15,5 +14,10 @@ const Music = (props) => {
         </div>
     )
 }
+const mapStateToProps = (state) => {
+    return {
+        music: state.music.kpop
+    }
+}
 
-export default Music
+export default connect(mapStateToProps)(Music)

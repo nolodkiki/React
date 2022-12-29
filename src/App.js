@@ -14,7 +14,20 @@ import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
+import { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { inintialazeAppTC } from './redux/app-reducer';
+import Preloader from './components/common/preloader/Fetching';
 const App = function (props) {
+  
+  const inintialazeAppTC = () => props.inintialazeAppTC()
+  useEffect(() => {
+    inintialazeAppTC()
+  }, [])
+
+
+  if (!props.initialized) {return <Preloader />} 
+
   return (
     <Router>
       <div className="app">
@@ -22,7 +35,7 @@ const App = function (props) {
           <HeaderContainer />
         </div>
         <div className="wrapper">
-          <Navigation store={props.store} />
+          <Navigation />
           <div className='content__wrapper'>
             <Routes>
               {/* <Route path="/profile/*" element={<ProfileContainer store={props.store} />} /> */}
@@ -30,7 +43,7 @@ const App = function (props) {
                 <Route path=":userId" element={<ProfileContainer />} />
               </Route>
               <Route path="/dialogs/*" element={<DialogsContainer />} />
-              <Route path="/music" element={<Music store={props.store} />} />
+              <Route path="/music" element={<Music />} />
               <Route path="/news" element={<News />} />
               <Route path="/users" element={<UsersContainer />} />
               <Route path="/friends" element={<FriendsContainer />} />
@@ -46,7 +59,10 @@ const App = function (props) {
   );
 }
 
+const mapStateToProps = (state) => ({
+  initialized: state.app.initialized
+})
 
-export default App;
+export default connect(mapStateToProps, {inintialazeAppTC})(App)
 
 // Route следит за URL, если там написано, что написано в path то загружается element
