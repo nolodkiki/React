@@ -5,7 +5,7 @@ import { Element} from "../../common/preloader/FormsControl/FormControl";
 
 import Post from "./Post/Post";
 
-const MyPosts = (props) => {
+const MyPosts = React.memo(props => {
     let postElem = props.post.map((p) => <Post message={p.message} id={p.id} likes={p.likes} />)
 
 
@@ -21,7 +21,7 @@ const MyPosts = (props) => {
             <div>{postElem}</div>
         </div>
     );
-}
+})
 
 
 const maxLength = maxLengthCreator(25)
@@ -30,6 +30,7 @@ const PostForm = (props) => {
     
     return (
         <form onSubmit={props.handleSubmit}>
+            {console.log("RENDER")}
             <Field validate={[required, maxLength]} name='newPostText' component={Textarea} placeholder="write something"></Field>
             <div>
                 <button>Add Post</button>
