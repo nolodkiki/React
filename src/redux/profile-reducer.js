@@ -37,22 +37,23 @@ export const setUserStatus = status => ({type: SET_USER_STATUS, status})
 
 
 export const getProfileThunkCreator = (userId) => {
-    return (dispatch) => {
-        profileAPI.getProfile(userId).then(data => dispatch(setUserProfile(data)))
+    return async (dispatch) => {
+        const data = await profileAPI.getProfile(userId)
+        dispatch(setUserProfile(data))
     }
 }
 export const getUserStatusThunkCreator = (userId) => {
-    return (dispatch) => {
-        profileAPI.getStatus(userId).then(respons => dispatch(setUserStatus(respons.data)))
+    return async (dispatch) => {
+        const respons = await profileAPI.getStatus(userId)
+        dispatch(setUserStatus(respons.data))
     }
 }
 export const updateUserStatusThunkCreator = (status) => {
-    return (dispatch) => {
-        profileAPI.updateStatus(status).then(respons => {
+    return async (dispatch) => {
+        const respons = await profileAPI.updateStatus(status)
             if (respons.data.resultCode === 0) {
             dispatch(setUserStatus(status))
             }
-        })
     }
 }
 

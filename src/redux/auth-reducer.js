@@ -34,25 +34,23 @@ export const getAuthTC = () => (dispatch) => {
     }
 
 export const loginTC = (email, password, remeberMe) => {
-    return (dispatch) => {
-        authAPI.login(email, password, remeberMe).then(response => {
+    return async (dispatch) => {
+        const response = await authAPI.login(email, password, remeberMe)
             if (response.data.resultCode === 0) {
                 dispatch(getAuthTC())
             } else {
                 const errorMessage = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error'
                 dispatch(stopSubmit('login', {_error: errorMessage}))
             }
-        })
     }
 }
 
 export const logoutTC = () => {
-    return (dispatch) => {
-        authAPI.logout().then(respons => {
+    return async (dispatch) => {
+        let respons = await authAPI.logout()
             if (respons.data.resultCode === 0) {
                 dispatch(setAuthUserData(null, null, null, false))
             }
-        })
     }
 }
 
