@@ -1,4 +1,5 @@
 import usersAPI from "../api/api"
+import { updateObjectInArray } from "../Utils/object-helpers"
 
 let initialState = {
     users: [],
@@ -15,23 +16,25 @@ let usersReducer = (state = initialState, action) => {
         case FOLLOW: {
             return {
                 ...state,
-                users: state.users.map(u => {
-                    if (u.id === action.userId) {
-                        return { ...u, followed: true }
-                    }
-                    return u
-                })
+                users: updateObjectInArray(state.users, action.userId, 'id', { followed: true })
+                // users: state.users.map(u => {
+                //     if (u.id === action.userId) {
+                //         return { ...u, followed: true }
+                //     }
+                //     return u
+                // })
             }
         }
         case UNFOLLOW: {
             return {
                 ...state,
-                users: state.users.map(u => {
-                    if (u.id === action.userId) {
-                        return { ...u, followed: false }
-                    }
-                    return u
-                })
+                users: updateObjectInArray(state.users, action.userId, 'id', { followed: false })
+                // users: state.users.map(u => {
+                //     if (u.id === action.userId) {
+                //         return { ...u, followed: false }
+                //     }
+                //     return u
+                // })
             }
         }
         case SET_USERS: {
@@ -82,33 +85,30 @@ export const getUserThunkCreator = (currentPage, pageSize) => {
     return async (dispatch) => {
         dispatch(toggleFetching(true))
         const data = await usersAPI.getUsers(currentPage, pageSize)
-            dispatch(page(currentPage))
-            dispatch(toggleFetching(false))
-            dispatch(setUsers(data.items))
-            dispatch(setTotalUsers(data.totalCount))
+        dispatch(page(currentPage))
+        dispatch(toggleFetching(false))
+        dispatch(setUsers(data.items))
+        dispatch(setTotalUsers(data.totalCount))
     }
 }
 
-
+const followUnfollowFlow = async (dispatch, userId, apiMethod, actionCreator) => {
+    dispatch(toggFollowingProgress(true, userId))
+    const resultCode = await apiMethod(userId)
+    if (resultCode === 0) {
+        dispatch(actionCreator(userId))
+    }
+    dispatch(toggFollowingProgress(false, userId))
+}
 
 export const followThunkCreator = (userId) => {
     return async (dispatch) => {
-        dispatch(toggFollowingProgress(true, userId))
-        const resultCode = await usersAPI.postFollow(userId)
-            if (resultCode === 0) {
-                dispatch(followSuccess(userId))
-            }
-            dispatch(toggFollowingProgress(false, userId))
+        followUnfollowFlow(dispatch, userId, usersAPI.postFollow, followSuccess)
     }
 }
 export const unfollowThunkCreator = (userId) => {
     return async (dispatch) => {
-        dispatch(toggFollowingProgress(true, userId))
-        const resultCode = await usersAPI.deleteFollow(userId)
-            if (resultCode === 0) {
-                dispatch(unfollowSuccess(userId))
-            }
-            dispatch(toggFollowingProgress(false, userId))
+        followUnfollowFlow(dispatch, userId, usersAPI.deleteFollow, unfollowSuccess)
     }
 }
 
